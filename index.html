@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORBITAL — Leave Earth. Briefly.</title>
+  <meta name="description" content="ORBITAL is a scroll-driven voyage to low Earth orbit. Ascend, float, see the whole planet at once, and come home changed. Fictional space tourism, real goosebumps.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ORBITAL — Leave Earth. Briefly.">
+  <meta property="og:description" content="A scroll-driven voyage to low Earth orbit: ascent, weightlessness, the overview effect, and the fall home.">
+  <meta property="og:url" content="https://akshay-th.github.io/orbital/">
+  <meta property="og:site_name" content="ORBITAL">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='34' r='15' fill='%231F6FA8'/%3E%3Ccircle cx='32' cy='34' r='15' fill='none' stroke='%2335E0FF' stroke-width='2.5'/%3E%3Cellipse cx='32' cy='34' rx='27' ry='9' fill='none' stroke='%2335E0FF' stroke-width='2' transform='rotate(-18 32 34)'/%3E%3Ccircle cx='53' cy='22' r='2.6' fill='%23FFB45C'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== Preloader : pre-flight check ===== -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__panel">
+      <p class="preloader__title">ORBITAL // PRE-FLIGHT CHECK</p>
+      <ul class="preloader__list" id="preloaderList">
+        <li><span>PROPELLANT LOAD</span><b>OK</b></li>
+        <li><span>TELEMETRY LINK</span><b>OK</b></li>
+        <li><span>LIFE SUPPORT</span><b>OK</b></li>
+        <li><span>GUIDANCE ALIGNED</span><b>OK</b></li>
+        <li><span>CREW STRAPPED IN</span><b>GO</b></li>
+      </ul>
+      <div class="preloader__bar"><i id="preloaderBar"></i></div>
+      <p class="preloader__foot" id="preloaderFoot">T-MINUS&nbsp;—</p>
+    </div>
+  </div>
+
+  <!-- ===== Scene ===== -->
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ===== Mission HUD ===== -->
+  <div class="hud hud--bl" id="hud" aria-hidden="true">
+    <p class="hud__row hud__row--big">ALT <span id="hudAlt">000</span> km</p>
+    <p class="hud__row">VEL <span id="hudVel">00000</span> km/h</p>
+    <p class="hud__row">PHASE <span id="hudPhase">PAD</span></p>
+    <div class="hud__ticks" id="hudTicks">
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+  </div>
+  <div class="hud hud--tr" aria-hidden="true">
+    <p class="hud__row">28.573°N &nbsp;80.649°W</p>
+    <p class="hud__row">MET <span id="hudClock">+00:00:00</span></p>
+  </div>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav">
+    <a class="nav__logo" href="#top">ORBITAL<i>*</i></a>
+    <a class="nav__cta" href="#booking">Reserve a seat</a>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <p class="hero__kicker reveal">Crewed flights to low Earth orbit — boarding 2027</p>
+      <h1 class="hero__title" id="heroTitle">
+        <span class="line"><span class="word">Leave</span> <span class="word">Earth.</span></span>
+        <span class="line line--accent"><span class="word">Briefly.</span></span>
+      </h1>
+      <p class="hero__sub reveal">Ninety minutes. One lap around everything you have ever known.
+      ORBITAL flies ordinary people to 400&nbsp;kilometres — and brings them back different.</p>
+      <div class="hero__cue reveal" id="scrollCue">
+        <span>SCROLL TO BEGIN ASCENT</span>
+        <i></i>
+      </div>
+    </section>
+
+    <!-- Chapter 01 : Ascent -->
+    <section class="chapter" id="ascent" data-phase="ASCENT">
+      <header class="chapter__head">
+        <span class="chapter__index">CH&nbsp;01</span>
+        <span class="chapter__rule"></span>
+        <span class="chapter__label">T+00:00 — T+08:30</span>
+      </header>
+      <h2 class="chapter__title">Ascent</h2>
+      <p class="chapter__lead">Eight and a half minutes of honest violence. The pad falls away,
+      the sky runs out of blue, and the stars stop twinkling — because there is no longer any
+      air left between you and them.</p>
+      <dl class="stats">
+        <div class="stat"><dt>Peak acceleration</dt><dd>3.2 g</dd></div>
+        <div class="stat"><dt>Orbital velocity</dt><dd>28,000 km/h</dd></div>
+        <div class="stat"><dt>Engine cutoff</dt><dd>T+08:30</dd></div>
+      </dl>
+    </section>
+
+    <!-- Chapter 02 : Weightless -->
+    <section class="chapter" id="weightless" data-phase="ORBIT">
+      <header class="chapter__head">
+        <span class="chapter__index">CH&nbsp;02</span>
+        <span class="chapter__rule"></span>
+        <span class="chapter__label">MAIN ENGINE CUTOFF</span>
+      </header>
+      <h2 class="chapter__title">Weightless</h2>
+      <p class="chapter__lead">Then, silence. Gravity lets go of you politely, like a hand
+      releasing yours at the end of a long dance. Your pen floats. Your worries, strangely,
+      do too.</p>
+      <div class="chips" id="chips">
+        <span class="chip">cabin pressure · nominal</span>
+        <span class="chip chip--accent">sunrise in 46 min</span>
+        <span class="chip">your coffee, spherical</span>
+        <span class="chip">heart rate · 61 bpm</span>
+      </div>
+    </section>
+
+    <!-- Chapter 03 : The Overview -->
+    <section class="chapter chapter--overview" id="overview" data-phase="OVERVIEW">
+      <header class="chapter__head">
+        <span class="chapter__index">CH&nbsp;03</span>
+        <span class="chapter__rule"></span>
+        <span class="chapter__label">NADIR WINDOW · ALT 400 KM</span>
+      </header>
+      <h2 class="chapter__title">The Overview</h2>
+      <p class="chapter__lead chapter__lead--big">You will press your face to the window and look
+      down at a blue curve with no borders drawn on it, wearing its whole atmosphere as a thin
+      bright line — and you will understand the word <em>home</em> for the first time.</p>
+      <p class="chapter__quote">“You don’t see the world. You finally see that it is one thing.”
+      <span>— every astronaut, more or less</span></p>
+    </section>
+
+    <!-- Chapter 04 : Return -->
+    <section class="chapter" id="return" data-phase="RE-ENTRY">
+      <header class="chapter__head">
+        <span class="chapter__index">CH&nbsp;04</span>
+        <span class="chapter__rule"></span>
+        <span class="chapter__label">DEORBIT BURN COMMITTED</span>
+      </header>
+      <h2 class="chapter__title">Return</h2>
+      <p class="chapter__lead">Falling is just flying with a deadline. The capsule wraps itself
+      in a quiet sheet of fire, the sky turns blue again from the top down, and the planet —
+      generously — agrees to catch you.</p>
+      <dl class="stats">
+        <div class="stat"><dt>Plasma peak</dt><dd class="stat--warm">1,650 °C</dd></div>
+        <div class="stat"><dt>Chute deploy</dt><dd>7 km</dd></div>
+        <div class="stat"><dt>Splashdown</dt><dd>± 4 km</dd></div>
+      </dl>
+    </section>
+
+    <!-- Booking -->
+    <section class="booking" id="booking" data-phase="MANIFEST">
+      <header class="chapter__head">
+        <span class="chapter__index">MANIFEST</span>
+        <span class="chapter__rule"></span>
+        <span class="chapter__label">SEASON 2027 · 6 SEATS PER FLIGHT</span>
+      </header>
+      <h2 class="chapter__title">Choose your window.</h2>
+
+      <div class="booking__grid">
+        <ul class="flights">
+          <li class="flight">
+            <span class="flight__id">ORB-05</span>
+            <span class="flight__date">14 MAR 2027</span>
+            <span class="flight__seats">2 seats left</span>
+          </li>
+          <li class="flight">
+            <span class="flight__id">ORB-06</span>
+            <span class="flight__date">02 JUN 2027</span>
+            <span class="flight__seats">5 seats left</span>
+          </li>
+          <li class="flight flight--featured">
+            <span class="flight__id">ORB-07</span>
+            <span class="flight__date">21 SEP 2027</span>
+            <span class="flight__seats">boarding opens</span>
+          </li>
+          <li class="flight flight--soldout">
+            <span class="flight__id">ORB-08</span>
+            <span class="flight__date">11 DEC 2027</span>
+            <span class="flight__seats">waitlist</span>
+          </li>
+        </ul>
+
+        <aside class="price-card" id="priceCard">
+          <p class="price-card__tag">FLIGHT ORB-07 · SEPTEMBER</p>
+          <p class="price-card__price">$485,000</p>
+          <ul class="price-card__list">
+            <li>3 days of pre-flight training, Cape side</li>
+            <li>1 full orbit · 90 minutes · 16 sunrises optional</li>
+            <li>Nadir window seat, guaranteed</li>
+            <li>Return to Earth included</li>
+          </ul>
+          <a class="price-card__btn" href="#" id="reserveBtn">Reserve your seat</a>
+          <p class="price-card__fine">Fully refundable until T-minus 30 days.</p>
+        </aside>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer__brand">ORBITAL<i>*</i></p>
+      <p class="footer__note">* A fictional company. No rockets were fueled in the making of
+      this page — it exists to make you look up. Built with Three.js &amp; GSAP.</p>
+      <p class="footer__coords">LAUNCH COMPLEX 39A · 28.6084°N, 80.6043°W · MMXXVII</p>
+    </footer>
+
+  </main>
+
+  <!-- Libraries (CDN, UMD) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
